@@ -14,10 +14,24 @@ var options = new OpenAIClientOptions
 };
 
 //create chat client
-
 IChatClient client = new OpenAIClient(credentials, options).GetChatClient("gpt-4o-mini").AsIChatClient();
 
-//send a message to the model and get a response
-ChatResponse response = await client.GetResponseAsync("What is Ai ? explain max 20 words");
+#region Basic Completion
+////send a message to the model and get a response
+//ChatResponse response = await client.GetResponseAsync("What is Ai ? explain max 20 words");
 
-Console.WriteLine(response);
+//Console.WriteLine(response);
+#endregion
+
+#region Streaming Completion
+string prompt = "What is Ai ? explain max 200 words";
+Console.WriteLine($"user >>> {prompt}");
+
+var responseStream = client.GetStreamingResponseAsync(prompt);
+
+await foreach (var response in responseStream)
+{
+    Console.Write(response);
+}
+
+#endregion
