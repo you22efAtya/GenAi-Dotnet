@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalysis", "ImageAnaly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficCamAnalysis", "TrafficCamAnalysis\TrafficCamAnalysis.csproj", "{6148F5EB-7C5D-4404-BD61-73E1584CEB2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalysis_Ollama", "ImageAnalysis_Ollama\ImageAnalysis_Ollama.csproj", "{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{6148F5EB-7C5D-4404-BD61-73E1584CEB2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6148F5EB-7C5D-4404-BD61-73E1584CEB2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6148F5EB-7C5D-4404-BD61-73E1584CEB2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{559FF3C9-E2D9-EE11-BF45-2BB3424AAC89} = {57806591-A182-4E63-AAA8-B127681257B1}
 		{6291BF84-6C55-4547-91C5-2C8933D1A5F5} = {0D082DC2-C911-42AD-9EDE-3BD5BBEFD008}
 		{6148F5EB-7C5D-4404-BD61-73E1584CEB2A} = {0D082DC2-C911-42AD-9EDE-3BD5BBEFD008}
+		{DEC4C7DD-8B02-46DE-8A6D-A5241BBB13C6} = {0D082DC2-C911-42AD-9EDE-3BD5BBEFD008}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {907A425A-56B0-444D-9567-0C1555C18BA1}
