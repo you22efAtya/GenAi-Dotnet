@@ -10,9 +10,10 @@ builder.AddServiceDefaults();
 
 builder.AddNpgsqlDbContext<CatalogDbContext>(connectionName: "catalogdb");
 
-builder.Services.AddScoped<ProductService>();
 
-// Add AI Chat Client
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductAIService>();
+
 var credential = new ApiKeyCredential(builder.Configuration["GitHubModels:Token"] ?? throw new InvalidOperationException("Missing configuration: GitHubModels:Token."));
 var options = new OpenAIClientOptions()
 {

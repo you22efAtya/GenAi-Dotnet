@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.AI;
+using Microsoft.Extensions.VectorData;
 
 namespace Catalog.Services;
 
-public class ProductAIService(IChatClient chatClient, CatalogDbContext dbContext)
+public class ProductAIService(IChatClient chatClient,CatalogDbContext dbContext)
 {
     public async Task<string> SupportAsync(string userQuery, CancellationToken cancellationToken = default)
     {
