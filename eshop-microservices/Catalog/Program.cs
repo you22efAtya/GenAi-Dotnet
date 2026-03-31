@@ -1,5 +1,6 @@
 
 using Microsoft.Extensions.AI;
+using Microsoft.Extensions.DependencyInjection;
 using OpenAI;
 using System.ClientModel;
 
@@ -22,10 +23,18 @@ var options = new OpenAIClientOptions()
 
 var openAiClient = new OpenAIClient(credential, options);
 
-IChatClient chatClient =
+var chatClient =
     openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient();
 
+var embeddingGenerator =
+    openAiClient.GetEmbeddingClient("openai/text-embedding-3-small").AsIEmbeddingGenerator();
+
+
 builder.Services.AddChatClient(chatClient);
+builder.Services.AddEmbeddingGenerator(embeddingGenerator);
+
+builder.AddQdrantClient("vectordb");
+builder.Services.AddQdrantCollection<ulong, ProductVector>("product-vectors");
 
 var app = builder.Build();
 
