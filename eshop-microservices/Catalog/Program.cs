@@ -1,44 +1,34 @@
-
 using Microsoft.Extensions.AI;
-using Microsoft.Extensions.DependencyInjection;
-using OpenAI;
-using System.ClientModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.AddServiceDefaults();
 
-builder.AddNpgsqlDbContext<CatalogDbContext>(connectionName: "catalogdb");
-
+builder.AddNpgsqlDbContext<CatalogDbContext>(
+    connectionName: "catalogdb");
 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductAIService>();
 
-var credential = new ApiKeyCredential(builder.Configuration["GitHubModels:Token"] ?? throw new InvalidOperationException("Missing configuration: GitHubModels:Token."));
-var options = new OpenAIClientOptions()
-{
-    Endpoint = new Uri("https://models.github.ai/inference")
-};
 
-var openAiClient = new OpenAIClient(credential, options);
+// Ollama
+builder.AddOllamaApiClient("llama")
+    .AddChatClient();
 
-var chatClient =
-    openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient();
-
-var embeddingGenerator =
-    openAiClient.GetEmbeddingClient("openai/text-embedding-3-small").AsIEmbeddingGenerator();
+builder.AddOllamaApiClient("nomic-embed-text")
+    .AddEmbeddingGenerator();
 
 
-builder.Services.AddChatClient(chatClient);
-builder.Services.AddEmbeddingGenerator(embeddingGenerator);
-
+// Qdrant
 builder.AddQdrantClient("vectordb");
-builder.Services.AddQdrantCollection<ulong, ProductVector>("product-vectors");
+
+builder.Services.AddQdrantCollection<ulong, ProductVector>(
+    "product-vectors");
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.MapDefaultEndpoints();
 
 app.UseHttpsRedirection();

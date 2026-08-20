@@ -27,13 +27,25 @@ var vectordb = builder
     .AddQdrant("vectordb")
     .WithDataVolume();
 
+var ollama = builder
+    .AddOllama("ollama")
+    .WithDataVolume();
+
+var chatModel = ollama.AddModel("llama", "llama3.2");
+
+var embeddingModel = ollama.AddModel("nomic-embed-text", "nomic-embed-text");
+
 // Projects
 var catalog = builder
         .AddProject<Projects.Catalog>("catalog")
         .WithReference(catalogdb)
         .WaitFor(catalogdb)
         .WithReference(vectordb)
-        .WaitFor(vectordb);
+        .WaitFor(vectordb)
+        .WithReference(chatModel)
+        .WithReference(embeddingModel)
+        .WaitFor(chatModel)
+        .WaitFor(embeddingModel);
 
 var basket = builder
         .AddProject<Projects.Basket>("basket")
